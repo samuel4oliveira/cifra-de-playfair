@@ -11,15 +11,14 @@ def criaListaDePares(texto):
             textoAux += texto[i]
     if len(textoAux) % 2 != 0:
         textoAux += 'X'
-    
+
     #separando texto em pares
     textoCifrado = []
     for i in range(0, len(textoAux), 2):
     
         aux = textoAux[i] + textoAux[i+1] 
-        textoCifrado.append(aux)         
+        textoCifrado.append(aux)
     return textoCifrado
-
 
 import string
 def matriz(chave):
@@ -67,3 +66,19 @@ def aplicacaoRegra2(matriz, linha1, linha2, coluna):
     resultado = matriz[linha1][coluna] + matriz[linha2][coluna]
     return resultado
 
+def chamadaRegras(textoCifrado, matriz):
+	
+    resultado = ''
+	for i in range(len(textoCifrado)):
+		linha1, coluna1 = posicao(textoCifrado[i][0], matriz)
+		linha2, coluna2 = posicao(textoCifrado[i][1], matriz)
+		
+		if linha1 == linha2:
+		    resultado += aplicacaoRegra1(matriz[linha1], coluna1, coluna2)
+		elif coluna1 == coluna2:
+		    resultado += aplicacaoRegra2(matriz, linha1, linha2, coluna1)
+		else:
+		    coluna1, coluna2 = coluna2, coluna1
+		    resultado += matriz[linha1][coluna1]
+		    resultado += matriz[linha2][coluna2]
+	return resultado
