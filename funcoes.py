@@ -69,16 +69,16 @@ def aplicacaoRegra2(matriz, linha1, linha2, coluna):
 def chamadaRegras(textoCifrado, matriz):
 	
     resultado = ''
-	for i in range(len(textoCifrado)):
-		linha1, coluna1 = posicao(textoCifrado[i][0], matriz)
-		linha2, coluna2 = posicao(textoCifrado[i][1], matriz)
+    for i in range(len(textoCifrado)):
+        linha1, coluna1 = posicao(textoCifrado[i][0], matriz)
+        linha2, coluna2 = posicao(textoCifrado[i][1], matriz)
 		
-		if linha1 == linha2:
-		    resultado += aplicacaoRegra1(matriz[linha1], coluna1, coluna2)
-		elif coluna1 == coluna2:
-		    resultado += aplicacaoRegra2(matriz, linha1, linha2, coluna1)
-		else:
-		    coluna1, coluna2 = coluna2, coluna1
-		    resultado += matriz[linha1][coluna1]
-		    resultado += matriz[linha2][coluna2]
-	return resultado
+        if linha1 == linha2:
+            resultado += aplicacaoRegra1(matriz[linha1], coluna1, coluna2)
+        elif coluna1 == coluna2:
+            resultado += aplicacaoRegra2(matriz, linha1, linha2, coluna1)
+        else:
+            coluna1, coluna2 = coluna2, coluna1
+            resultado += matriz[linha1][coluna1]
+            resultado += matriz[linha2][coluna2]
+    return resultado

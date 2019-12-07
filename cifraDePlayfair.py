@@ -11,24 +11,27 @@ texto = texto.replace(".", "")
 texto = texto.replace(")", "")
 texto = texto.replace("Y", "")
 
-
-#cifrando o texto
-textoCifrado = funcoes.criaListaDePares(texto)
-
-#utilizando a chave do usuário para gerar a matriz
 #chave = input("Digite a chave: ")
 chave = "SAMUEL"
 chave.replace("Y", "")
-matriz = funcoes.matriz(chave)
 
+escolha = int(input("Criptografar: 1 ou Descriptografar: 2 "))
 
-for linha in matriz:
-    print(linha)
+if escolha == 1:
+    
+    #utilizando a chave do usuário para gerar a matriz
+    matriz = funcoes.matriz(chave)
 
-resultado = funcoes.chamadaRegras(textoCifrado, matriz)
-print(resultado)
+    #transformando o texto em lista de pares
+    textoCifrado = funcoes.criaListaDePares(texto)
 
-# pathSaida = input("Digite o endereço do arquivo de saída: ")
-# textoCriptografado = open(pathSaida, 'w+')
-# textoCriptografado.write(texto + chave)
-# textoCriptografado.close()
+    resultado = funcoes.chamadaRegras(textoCifrado, matriz)
+    print(resultado)
+
+    # pathSaida = input("Digite o endereço do arquivo de saída: ")
+    # textoCriptografado = open(pathSaida, 'w+')
+    # textoCriptografado.write(texto + chave)
+    # textoCriptografado.close()
+else:
+
+    pass
