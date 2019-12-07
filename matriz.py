@@ -1,9 +1,24 @@
+import string
 def matriz(chave):
-    matriz = [['a', 'b', 'c', 'd', 'e'],
-              ['f', 'g', 'h', 'i', 'j'],
-              ['k', 'l', 'm', 'n', 'o'],
-              ['p', 'q', 'r', 's', 't'],
-              ['u', 'v', 'w', 'x', 'z']]
 
-    print(matriz)
+    #recebendo alfabeto
+    alfabeto = list(string.ascii_uppercase)
+    alfabeto.remove('Y')
+
+    #inserindo chave no alfabeto
+    for i in range(len(chave)-1, -1, -1):
+        alfabeto.remove(chave[i])
+        alfabeto.insert(0, chave[i])
+
+    #transformando alfabeto em matriz
+    linha = []
+    matriz = []
+    for i in range(len(alfabeto)):
+        
+        linha.append(alfabeto[i])
+        if i == 4 or i == 9 or i == 14 or i == 19 or i == 24:
+            matriz.append(linha)
+            linha = []
+            pass
+
     return matriz
