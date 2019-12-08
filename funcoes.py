@@ -1,5 +1,6 @@
 def criaListaDePares(texto):
     
+    #separando letras iguais com X
     textoAux = ''
     for i in range(len(texto)):
         try:  
@@ -46,37 +47,45 @@ def matriz(chave):
     return matriz
 
 def posicao(letra, matriz):
-
+    
     for i in range(5):
         for j in range(5):
             if letra == matriz[i][j]:
                 return i, j
 
-def aplicacaoRegra1(linha, coluna1, coluna2):
+def aplicacaoRegra1(linha, coluna1, coluna2, encriptar):
 
-    coluna1 = (coluna1 + 1) % 5
-    coluna2 = (coluna2 + 1) % 5 
+    if encriptar == 1:
+        coluna1 = (coluna1 + 1) % 5
+        coluna2 = (coluna2 + 1) % 5
+    else:
+        coluna1 = (coluna1 - 1) % 5
+        coluna2 = (coluna2 - 1) % 5
     resultado = linha[coluna1] + linha[coluna2]
     return resultado
 
-def aplicacaoRegra2(matriz, linha1, linha2, coluna):
+def aplicacaoRegra2(matriz, linha1, linha2, coluna, encriptar):
 
-    linha1 = (linha1 + 1) % 5
-    linha2 = (linha2 + 1) % 5 
+    if encriptar == 1:
+        linha1 = (linha1 + 1) % 5
+        linha2 = (linha2 + 1) % 5
+    else:
+        linha1 = (linha1 - 1) % 5
+        linha2 = (linha2 - 1) % 5
     resultado = matriz[linha1][coluna] + matriz[linha2][coluna]
     return resultado
 
-def chamadaRegras(textoCifrado, matriz):
+def chamadaRegras(listaDePares, matriz, encriptar):
 	
     resultado = ''
-    for i in range(len(textoCifrado)):
-        linha1, coluna1 = posicao(textoCifrado[i][0], matriz)
-        linha2, coluna2 = posicao(textoCifrado[i][1], matriz)
+    for i in range(len(listaDePares)):
+        linha1, coluna1 = posicao(listaDePares[i][0], matriz)
+        linha2, coluna2 = posicao(listaDePares[i][1], matriz)
 		
         if linha1 == linha2:
-            resultado += aplicacaoRegra1(matriz[linha1], coluna1, coluna2)
+            resultado += aplicacaoRegra1(matriz[linha1], coluna1, coluna2, encriptar)
         elif coluna1 == coluna2:
-            resultado += aplicacaoRegra2(matriz, linha1, linha2, coluna1)
+            resultado += aplicacaoRegra2(matriz, linha1, linha2, coluna1, encriptar)
         else:
             coluna1, coluna2 = coluna2, coluna1
             resultado += matriz[linha1][coluna1]

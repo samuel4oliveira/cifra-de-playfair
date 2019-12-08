@@ -1,37 +1,36 @@
 import funcoes
 
 #recebendo e tratando o texto
-#pathEntrada = input("Digite o endereço do arquivo de entrada: ")
-texto = open("entrada.txt", 'r').read()
+entrada = input("Digite o endereço do arquivo de entrada: ")
+texto = open(entrada, 'r').read()
 texto = texto.upper()
 texto = texto.replace(" ", "")
 texto = texto.replace("\n", "")
-texto = texto.replace(":", "")
-texto = texto.replace(".", "")
-texto = texto.replace(")", "")
 texto = texto.replace("Y", "")
 
-#chave = input("Digite a chave: ")
-chave = "SAMUEL"
-chave.replace("Y", "")
+#recebendo e tratando a chave
+chave = input("Digite a chave: ")
+chave = chave.upper()
+chave = chave.replace("Y", "")
 
-escolha = int(input("Criptografar: 1 ou Descriptografar: 2 "))
+#utilizando a chave do usuário para gerar a matriz
+matriz = funcoes.matriz(chave)
 
-if escolha == 1:
-    
-    #utilizando a chave do usuário para gerar a matriz
-    matriz = funcoes.matriz(chave)
+#transformando o texto em uma lista de pares
+listaDePares = funcoes.criaListaDePares(texto)
 
-    #transformando o texto em lista de pares
-    textoCifrado = funcoes.criaListaDePares(texto)
+encriptar = int(input("Descriptografar - 0 || Criptografar - 1: "))
+if encriptar == 1:
 
-    resultado = funcoes.chamadaRegras(textoCifrado, matriz)
-    print(resultado)
-
-    # pathSaida = input("Digite o endereço do arquivo de saída: ")
-    # textoCriptografado = open(pathSaida, 'w+')
-    # textoCriptografado.write(texto + chave)
-    # textoCriptografado.close()
+    #Verifica e aplica a regra de cada par
+    resultado = funcoes.chamadaRegras(listaDePares, matriz, encriptar)
 else:
 
-    pass
+    #Verifica e aplica a regra de cada par
+    resultado = funcoes.chamadaRegras(listaDePares, matriz, encriptar)
+
+#Criando e escrevendo o resultado da encriptação/decriptação
+pathSaida = input("Digite o endereço para o arquivo de saída: ")
+arquivoResultado = open(pathSaida, 'w+')
+arquivoResultado.write(resultado)
+arquivoResultado.close()
